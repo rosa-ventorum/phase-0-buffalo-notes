@@ -6,7 +6,7 @@
 
 - [x] [**Работа с терминалом и фреймворками (ESLint, Jest)**](notes/terminal.md)
 - [x] [**Конспект по базовому JS**](notes/js-base.md)
-- [X] [**Конспект по семантике HTML**](notes/html-semantics.md)
+- [X] [**Конспект по семантике в HTML**](notes/html-semantics.md)
 - [x] [**Конспект по DOM**](notes/dom.md)
 - [ ] [**Конспект по стилям CSS**](notes/css-styles.md)
 
