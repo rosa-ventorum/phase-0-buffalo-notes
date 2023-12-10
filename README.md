@@ -9,6 +9,7 @@
 - [X] [**Конспект по семантике в HTML**](notes/html-semantics.md)
 - [x] [**Конспект по DOM**](notes/dom.md)
 - [ ] [**Конспект по стилям CSS**](notes/css-styles.md)
+- [x] [**Конспект по методам Массивов**](/notes/array-methods.md)
 
 ### ⚠️ О проекте
 
