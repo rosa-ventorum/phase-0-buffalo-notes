@@ -48,14 +48,13 @@
 - `git config --global --replace-all alias.aliasCommandName 'content'` - перезаписывает содержимое команды `aliasCommandName`;
 
 В качестве content передается список команд, которые нужно выполнять. Например:
-- `'!git add -A && git commit -m \"$1\"'`
+- `'!git add -A && git commit -m'`
     - где `!` - знак, который оповещает, что будет команда оболочки;
-    - `git add -A` - сама команда;
-    - `&&` - соединитель для команд;
-    - `\"$1\"` - переменная, которая будет использоваться для описания коммита
+    - `git add -A` и `git commit -m` - сами команды;
+    - `&&` - соединитель для команд.
 
 Вот что получилось:
-- `git config --global --add alias.megamit '!git add -A && git commit -m \"$1\"'`
+- `git config --global --add alias.megamit "!git add -A && git commit -m"`
 
 Теперь, чтобы выполнить список команд для быстрого создания коммита, достаточно написать:
 - `git megamit "description"`
