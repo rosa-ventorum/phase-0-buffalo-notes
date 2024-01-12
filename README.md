@@ -8,10 +8,12 @@
 - [x] [**Конспект по базовому JS**](notes/js-base.md)
 - [x] [**Конспект по семантике в HTML**](notes/html-semantics.md)
 - [x] [**Конспект по DOM**](notes/dom.md)
-- [ ] [**Конспект по стилям CSS**](notes/css-styles.md)
+- [ ] [**Конспект по стилям CSS на который я забил**](notes/css-styles.md)
 - [x] [**Конспект по методам массивов**](/notes/array-methods.md)
 - [x] [**Конспект по методам строк**](/notes/string-methods.md)
 - [x] [**Работа с Гитом (пуши, бранчи, мерджи, алиасы)**](/notes/git.md)
+
+- [x] [**Sequelize CLI - База данных почти от А до Я**](notes/sequelize-cli.md)
 
 ### ⚠️ О проекте
 
