@@ -22,11 +22,11 @@
 10. `npx create-gitignore node` - создаем собсна гитигнор файл. Важно создать его после .env, иначе он не попадет в игнор. Возможно.
 11. `npx eslint --init` - инициализируем пакет ESLint (опять же, после инициализации реакта, иначе будет страдание)
 
-### Быстрые зависимости (весь кор проекта в пару строчек для винды)
+### Быстрые зависимости (весь кор проекта в строчку, для винды)
 
-    npm init -y ; npm i pg pg-hstore sequelize express morgan @babel/core @babel/preset-env @babel/preset-react @babel/register
-
-    npm i react react-dom dotenv ; npm i -D sequelize-cli nodemon ; npx create-gitignore node ; npx eslint --init
+```
+npm init -y ; npm i pg pg-hstore sequelize express morgan @babel/core @babel/preset-env @babel/preset-react @babel/register react react-dom dotenv ; npm i -D sequelize-cli nodemon ; npx create-gitignore node ; npx eslint --init
+```
 
 ---
 
@@ -63,15 +63,21 @@
     "no-console": 0,
     "quotes": ["error", "single"],
     "global-require": 0,
-    "import/no-dynamic-require": 0
+    "import/no-dynamic-require": 0,
+    "max-len": 0,
+    "no-alert": 0
 }
 ```
 
 # СКЕЛЕТ
 
-    md public\styles ; md public\scripts ; md public\media ; md src\lib ; md src\routers ; md src\views\components ; md src\views\pages
+В терминале:
 
-    Файлы пока не работают... НЕ ПИШИТЕ ЭТУ СТРОЧКУ
+```
+md public\styles ; md public\scripts ; md public\media ; md src\lib ; md src\routers ; md src\views\components ; md src\views\pages
+```
+
+Файлы пока не работают... НЕ ПИШИТЕ ЭТУ СТРОЧКУ
     echo '' > .env ; echo '' > .sequelizerc ; echo '' > .babelrc ; echo '' > public\scripts\index.js ; echo '' > src\app.js ; echo '' > src\lib\renderTemplate.js ; echo '' > src\routers\index.router.js ; echo '' > src\views\Layout.jsx
 
 # База данных
@@ -79,27 +85,27 @@
 В файле `/.sequelizerc`:
 
 ```js
-const path = require("path");
-require("dotenv").config();
+const path = require('path');
+require('dotenv').config();
 
 module.exports = {
-  config: path.resolve("db", "config", "database.json"),
-  "models-path": path.resolve("db", "models"),
-  "seeders-path": path.resolve("db", "seeders"),
-  "migrations-path": path.resolve("db", "migrations"),
+    'config': path.resolve('db', 'config', 'database.json'),
+    'models-path': path.resolve('db', 'models'),
+    'seeders-path': path.resolve('db', 'seeders'),
+    'migrations-path': path.resolve('db', 'migrations')
 };
 ```
 
-`npx sequelize-cli init`
+- В терминале: `npx sequelize-cli init`
 
-В файле `/.env`
+В файле `/.env`:
 
 ```
-DATABASE=postgres://admin:123@localhost:5432/dbname
 PORT=3005
+DATABASE=postgres://admin:123@localhost:5432/dbname
 ```
 
-В файле `/db/config/database.json`
+В файле `/db/config/database.json`:
 
 ```json
 {
@@ -109,7 +115,7 @@ PORT=3005
 }
 ```
 
-В файле `/.babelrc`
+В файле `/.babelrc`:
 
 ```json
 {
@@ -117,38 +123,40 @@ PORT=3005
 }
 ```
 
-В файле `/src/app.js`
+# EXPRESS
+
+В файле `/src/app.js`:
 
 ```js
-require("@babel/register");
-require("dotenv").config();
+require('@babel/register');
+require('dotenv').config();
 
-const express = require("express");
-const morgan = require("morgan");
-const path = require("path");
+const express = require('express');
+const morgan = require('morgan');
+const path = require('path');
 
 const app = express();
-const { PORT } = process.env ?? 3000;
+const { PORT } = process.env;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(morgan("dev"));
-app.use(express.static(path.join(process.cwd(), "public")));
+app.use(morgan('dev'));
+app.use(express.static(path.join(process.cwd(), 'public')));
 
-const indexRouter = require("./routers/index-router");
-const apiRouter = require("./routers/api-router");
+const indexRouter = require('./routers/index-router');
+const apiRouter = require('./routers/api-router');
 
-app.use("/", indexRouter);
-app.use("/api/v1", apiRouter);
+app.use('/', indexRouter);
+app.use('/api/v1', apiRouter);
 
 app.listen(PORT, () => console.log(`Сервер запущен: http://localhost:${PORT}`));
 ```
 
-В файле `/src/lib/renderTemplate.js`
+В файле `/src/lib/renderTemplate.js`:
 
 ```js
-const React = require("react");
-const ReactDOMServer = require("react-dom/server");
+const React = require('react');
+const ReactDOMServer = require('react-dom/server');
 
 module.exports = function renderTemplate(reactElement, properties, response) {
   const reactEl = React.createElement(reactElement, properties);
@@ -158,14 +166,14 @@ module.exports = function renderTemplate(reactElement, properties, response) {
 };
 ```
 
-Структура index файлов-роутеров:
+Примерная структура index файлов-роутеров (`/src/routers/index-router.jsx`):
 
 ```js
-const indexRouter = require("express").Router();
-const renderTemplate = require("../lib/renderTemplate");
-const MainPage = require("../views/pages/MainPage");
+const indexRouter = require('express').Router();
+const renderTemplate = require('../lib/renderTemplate');
+const MainPage = require('../views/pages/MainPage');
 
-indexRouter.get("/", async (req, res) => {
+indexRouter.get('/', async (req, res) => {
   try {
     renderTemplate(MainPage, {}, res);
   } catch (error) {
@@ -177,13 +185,13 @@ indexRouter.get("/", async (req, res) => {
 module.exports = indexRouter;
 ```
 
-Структура api файлов-роутеров:
+Примерная структура api файлов-роутеров (`/src/routers/api-router.jsx`):
 
 ```js
-const apiRouter = require("express").Router();
-const { Post } = require("../../db/models");
+const apiRouter = require('express').Router();
+const { Post } = require('../../db/models');
 
-apiRouter.get("/posts", async (req, res) => {
+apiRouter.get('/posts', async (req, res) => {
   try {
     const posts = await Post.findAll();
     res.json(posts);
@@ -202,18 +210,12 @@ module.exports = apiRouter;
 
 # REACT
 
-В файле `/src/views/Layout.jsx`
+В файле `/src/views/Layout.jsx`:
 
 ```js
-const React = require("react");
-const Home = require("./views/pages/Home");
-const ReactDOMServer = require("react-dom/server");
+const React = require('react');
 
 module.exports = function Layout({ children }) {
-  const linkStyle = {
-    color: "black",
-    textDecoration: "none",
-  };
   return (
     <html lang="ru">
       <head>
@@ -232,11 +234,13 @@ module.exports = function Layout({ children }) {
 
 Хотим сделать цикл - пожалуйста! Прокидываем пропсом в страницу массив и колдуем
 
-```js
-const React = require("react");
-const Layout = require("../Layout");
+В файле `/src/views/pages/HomePage.jsx`:
 
-module.exports = function Home({ posts }) {
+```js
+const React = require('react');
+const Layout = require('../Layout');
+
+module.exports = function HomePage({ posts }) {
   return (
     <Layout>
       <script defer src="/js/index.js" />
@@ -257,29 +261,29 @@ module.exports = function Home({ posts }) {
 
 # ФРОНТ
 
-В файле index.js
+В файле `/public/scripts/index.js`:
 
 ```js
-const button = document.querySelector(".some-button");
+const button = document.querySelector('.some-button');
 
-button.addEventListener("click", async (event) => {
-  if (event.target.tagName === "BUTTON") {
+button.addEventListener('click', async (event) => {
+  if (event.target.tagName === 'BUTTON') {
     event.preventDefault(); // если обрабатываем событие отправки формы или ссылки или еще чего
     try {
-      const response = await fetch(`/api/v1/somepath`, {
-        method: "POST", // GET POST PUT DELETE
+      const response = await fetch('/api/v1/somepath', {
+        method: 'POST', // GET POST PUT DELETE
         headers: {
-          "Content-type": "application/json",
+          'Content-type': 'application/json',
         },
         body: JSON.stringify(someObjWithData), // если ничего не нужно то можно и не передавать
       });
 
       if (response.status === 200) {
-        const dataFromApi = await response.json();
+        const dataFromApi = await response.json(); // формируем объект из ответа бэка - dataFromApi
         doSomethingWithData(dataFromApi);
       } else {
-        alert("Какая-нибудь ошибка...");
-        throw new Error("Syntax error");
+        alert('Какая-нибудь ошибка...');
+        throw new Error('Syntax error');
       }
     } catch (error) {
       console.log(error);
@@ -288,28 +292,28 @@ button.addEventListener("click", async (event) => {
 });
 ```
 
-Также мы можем на фронте формировать некоторый HTML-код используя данные из dataFromApi
+Также мы можем на фронте формировать некоторый HTML-код используя данные из `dataFromApi`
 
 - ```const someHTMLWithInterpolation = `<span>${dataFromApi.text}</span>`;```
 
 А потом внедрять его в дом через:
 
-- `someDOMNode.insertAdjacentHTML("afterbegin", someHTMLWithInterpolation);`
+- `someDOMNode.insertAdjacentHTML('afterbegin', someHTMLWithInterpolation);`
 
 Может пригодиться:
 
-- `event.target.closest("article").remove()`
-- `event.target.classList.value.includes("delete-btn")`
+- `event.target.closest('article').remove()`
+- `event.target.classList.value.includes('delete-btn')`
 - `const { id } = event.target`
 
 ```js
-const form = document.querySelector("#some-form");
+const form = document.querySelector('#some-form');
 
-form.addEventListener("submit", async (event) => {
+form.addEventListener('submit', async (event) => {
   event.preventDefault();
   const data = new FormData(form);
   const inputs = Object.fromEntries(data);
   console.log(inputs);
-  // тратата с фетчами
+  // тратата с фетчами, можем отправить инпуты на бэк и он их будет обрабатывать
 });
 ```
