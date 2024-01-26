@@ -166,7 +166,7 @@ module.exports = function renderTemplate(reactElement, properties, response) {
 };
 ```
 
-Примерная структура index файлов-роутеров (`/src/routers/index-router.jsx`):
+Примерная структура index файлов-роутеров (`/src/routers/index-router.js`):
 
 ```js
 const indexRouter = require('express').Router();
@@ -185,7 +185,7 @@ indexRouter.get('/', async (req, res) => {
 module.exports = indexRouter;
 ```
 
-Примерная структура api файлов-роутеров (`/src/routers/api-router.jsx`):
+Примерная структура api файлов-роутеров (`/src/routers/api-router.js`):
 
 ```js
 const apiRouter = require('express').Router();
