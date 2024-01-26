@@ -125,6 +125,22 @@ DATABASE=postgres://admin:123@localhost:5432/dbname
 
 # EXPRESS
 
+## Запуск сервера
+
+В файле `/package.json`:
+
+``` json
+"scripts": {
+    "dev": "nodemon src/app.js --ext js,jsx"
+},
+```
+
+В терминале:
+
+- `npm run dev`
+
+---
+
 В файле `/src/app.js`:
 
 ```js
