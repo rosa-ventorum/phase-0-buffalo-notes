@@ -16,6 +16,7 @@
 Фаза 2...?
 - [x] [**Sequelize CLI - База данных почти от А до Я**](notes/sequelize-cli.md)
 - [x] [**Каша для тех кто хочет зарыться в Express, читайте на свой страх и риск!**](notes/express.md)
+- [x] [**Express от A до Бэ! Пока самая актуальная тудушка**](notes/express-fromAtoB.md)
 
 ### ⚠️ О проекте
 
