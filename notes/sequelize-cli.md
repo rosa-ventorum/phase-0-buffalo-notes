@@ -51,7 +51,7 @@ module.exports = {
 - // npx sequelize-cli model:generate --name Product --attributes product_name:string
 - // npx sequelize-cli model:generate --name User --attributes user_name:string,user_fav_products:integer
 
-после этого создается файл миграций в `migrations`, там можно подправить поля (`allowNull: false`, `inuque: true` и тд)
+после этого создается файл миграций в `migrations`, там можно подправить поля (`allowNull: false`, `unique: true` и тд)
 также создается модель по названию в папке `models`, там описывается класс созданной таблицы
 
 учитываем, что сначала создаются все таблички у которых нет зависимых полей (типа `group_id`)
