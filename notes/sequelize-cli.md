@@ -79,7 +79,7 @@ references: {
 
 Чтобы модели знали кто с кем дружит (в секвалайзе), нужно в моделях прописать их ассоциации, потому что постгресу без разницы, он просто выставляет связи, а sequelize есть разница
 
-Для того, чтобы связать две модели, мы в методе associate прописываем
+Для того, чтобы связать две модели, мы в методе **associate** прописываем 
 
 - `this.hasMany(target: models.Student, { foreignKey: 'group_id' })`
 
@@ -97,6 +97,18 @@ references: {
 
 И в `hasMany` использовать как таргет только `User` вместо `models.User`
 
+
+## Варианты ассоциаций
+
+1. **Если 1:1**, то главная таблица ` hasOne`, вторая таблица `belongsTo` . Обязательно в миграции `Profile` написать `unique` для `user_id`.
+   1. Для `User` будет `this.hasOne(Profile, {foreignKey: "user_id"})` .
+   2. Для `Profile` будет `this.belongsTo(User, {foreignKey: "user_id"})`
+2. **Если 1:M**, то главная таблица `hasMany`, вторая таблица `belongsTo`.
+   1. Для `Library` будет `this.hasMany(Book, {foreignKey: "library_id"})` .
+   2. Для `Book` будет `this.belongsTo(Library, {foreignKey: "library_id"})`
+3. **Если M:M**, то в связующей таблице ничего не пишем.
+   1. В модели `Student` будет `belongsToMany(Group, {foreignKey: "student_id", through: "student_groups"})` .
+   2. В модели `Group` будет `belongsToMany(Student, {foreignKey: "group_id", through: "student_groups"})`
 ---
 
 ## СОЗДАЕМ СИДЕРЫ
