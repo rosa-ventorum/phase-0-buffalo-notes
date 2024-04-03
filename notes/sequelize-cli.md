@@ -101,14 +101,14 @@ references: {
 ## Варианты ассоциаций
 
 1. **Если 1:1**, то главная таблица ` hasOne`, вторая таблица `belongsTo` . Обязательно в миграции `Profile` написать `unique` для `user_id`.
-   1. Для `User` будет `this.hasOne(Profile, {foreignKey: "user_id"})` .
-   2. Для `Profile` будет `this.belongsTo(User, {foreignKey: "user_id"})`
+   1.1 Для `User` будет `this.hasOne(Profile, {foreignKey: "user_id"})` .
+   1.2 Для `Profile` будет `this.belongsTo(User, {foreignKey: "user_id"})`
 2. **Если 1:M**, то главная таблица `hasMany`, вторая таблица `belongsTo`.
-   1. Для `Library` будет `this.hasMany(Book, {foreignKey: "library_id"})` .
-   2. Для `Book` будет `this.belongsTo(Library, {foreignKey: "library_id"})`
+   2.1 Для `Library` будет `this.hasMany(Book, {foreignKey: "library_id"})` .
+   2.2 Для `Book` будет `this.belongsTo(Library, {foreignKey: "library_id"})`
 3. **Если M:M**, то в связующей таблице ничего не пишем.
-   1. В модели `Student` будет `belongsToMany(Group, {foreignKey: "student_id", through: "student_groups"})` .
-   2. В модели `Group` будет `belongsToMany(Student, {foreignKey: "group_id", through: "student_groups"})`
+   3.1 В модели `Student` будет `belongsToMany(Group, {foreignKey: "student_id", through: "student_groups"})` .
+   3.2 В модели `Group` будет `belongsToMany(Student, {foreignKey: "group_id", through: "student_groups"})`
 ---
 
 ## СОЗДАЕМ СИДЕРЫ
