@@ -9,22 +9,55 @@
 
 6. в корне проекта создаем файл `.sequelizerc`, который инициализирует структуру БД внутри проекта, в который копируем следующие строчки:
 
+    ```
+    const path = require('path');
+    
+    module.exports = {
+        'config': path.resolve('db', 'config', 'database.js'),
+        'models-path': path.resolve('db', 'models'),
+        'seeders-path': path.resolve('db', 'seeders'),
+        'migrations-path': path.resolve('db', 'migrations')
+    };
+    ```
+
+7. `npx sequelize-cli init` // ицициализируем структуру папок БД на основе `.sequelizerc`, после этого в корне создастся папка `bd`, в которой мы и будет страдать.
+
+8. npm i dotenv // подключаем библиотеку для хранения секретных данных: паролей, портов  и.т.д.
+9. в корне проекта создаем файл: ***.env*** с содержимым вида:
+    ```
+    DB_USERNAME=postgres
+    DB_PASSWORD=11111
+    DB_HOST=localhost
+    DB_NAME=db_cabel
+    DB_PORT=3000
+    ```
+10. добавдяем .env  в файл .gitignor
+11. создаем в коре проекта файл ***env.example*** с содержимым:
+    ```
+    DB_USERNAME=
+    DB_PASSWORD=
+    DB_HOST=
+    DB_NAME=
+    DB_PORT=
+    ```
+12. подключаем .env в файлах 1) .sequelizerc 2) главном index.js файле 3) db/config/database.j
+первой строкой: 
+    require('dotenv').config();
+
+
+13. в файле `config/database.json` описываем в объекте `development` нашу базу данных и информацию о подключении
+
+если .env используем:
 ```
-const path = require('path');
-
-module.exports = {
-    'config': path.resolve('db', 'config', 'database.js'),
-    'models-path': path.resolve('db', 'models'),
-    'seeders-path': path.resolve('db', 'seeders'),
-    'migrations-path': path.resolve('db', 'migrations')
-};
+"development": {
+    "username": process.env.DB_USERNAME,
+    "password": process.env.DB_PASSWORD,
+    "database": process.env.DB_NAME,
+    "host": process.env.DB_HOST,
+    "dialect": "postgres"
+  }
 ```
-
-7. `npx sequelize-cli init` // ицициализируем структуру папок БД на основе `.sequelizerc`, после этого в корне создастся папка `bd`, в которой мы и будет страдать
-
-8. в файле `config/database.json` описываем в объекте `development` нашу базу данных и информацию о подключении
-
-```
+```Вариант без .env
 {
   "development": {
     "username": "admin",
@@ -36,8 +69,7 @@ module.exports = {
   }
 }
 ```
-
-9. в `sqlShell` создаем базу данных через `CREATE DATABASE dbName OWNER admin;`
+14. в `sqlShell` создаем базу данных через `CREATE DATABASE dbName OWNER admin;`
    Или если у admin есть права на создание БД пишем
 
 - `npx sequelize-cli db:create`
