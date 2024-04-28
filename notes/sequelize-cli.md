@@ -41,10 +41,11 @@
     DB_PORT=
     ```
 12. подключаем .env в файлах 1) .sequelizerc 2) главном index.js файле 3) db/config/database.j
-первой строкой: 
+    первой строкой:
+    ```
     require('dotenv').config();
 
-
+    ```
 13. в файле `config/database.json` описываем в объекте `development` нашу базу данных и информацию о подключении
 
 если .env используем:
