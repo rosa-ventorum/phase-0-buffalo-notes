@@ -28,7 +28,7 @@
     DB_USERNAME=postgres
     DB_PASSWORD=11111
     DB_HOST=localhost
-    DB_NAME=db_cabel
+    DB_NAME=db_name
     DB_PORT=3000
     ```
 10. добавдяем .env  в файл .gitignor
