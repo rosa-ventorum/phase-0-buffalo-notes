@@ -10,6 +10,7 @@
 6. в корне проекта создаем файл `.sequelizerc`, который инициализирует структуру БД внутри проекта, в который копируем следующие строчки:
 
     ```
+    require('dotenv').config();
     const path = require('path');
     
     module.exports = {
